@@ -31,10 +31,16 @@ import cloud.artik.mqtt.*;
 public class SmartLightMqttSubPub 
 {
     // Device of "Example Simple Smart Light" (unique name cloud.artik.example.simple_smartlight)
-    final private String deviceId     = "<YOUR DEVICE ID>";
-    final private String deviceToken  = "<YOUR DEVICE TOKEN>";
+    static private String deviceId     = null;
+    static private String deviceToken  = null;
+   
+    static private final int EXPECTED_ARGUMENT_NUMBER = 4;
 
     public static void main( String[] args ) {
+    	if (!succeedParseCommand(args)) {
+    		printUsage();
+     		return;
+    	}
         SmartLightMqttSubPub mqtt = new SmartLightMqttSubPub();
         mqtt.startSession();
     }
@@ -49,7 +55,14 @@ public class SmartLightMqttSubPub
     
             @Override
             public void onFailure(OperationMode opMode, IMqttToken mqttToken, Throwable throwable) {
-                System.out.println("Failed with reason: " + throwable.toString());
+                System.out.println("Failed " + opMode + "; reason: " + throwable.toString());
+                switch (opMode) {
+                case CONNECT:
+                	System.exit(0);
+                default:
+                    break;
+                }
+                
             }
 
             @Override
@@ -110,10 +123,15 @@ public class SmartLightMqttSubPub
             
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
+            	if (mqttSession == null || !mqttSession.isConnected()) {
+            		System.out.println("\nExit.");
+            		return;
+            	}
                 try {
                     System.out.println("\nPrepare shutting down. Disconnecting... Please wait...");
                     mqttSession.disconnect();
                     Thread.sleep(2000); //wait for disconnection to finish
+                	
                 } catch (ArtikCloudMqttException|InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -176,4 +194,38 @@ public class SmartLightMqttSubPub
         String name;
         String operation;
     }
+    
+    ////////////////////////////////////////////
+   // Helper functions
+   //
+   // java -jar target/smartlight-mqtt-subpub.jar -d DEVICE_ID -t DEVICE_TOKEN
+   //
+   //       Must use ID and token of a device of 'Example Simple Smart Light' type (unique name cloud.artik.example.simple_smartlight)");
+   private static boolean succeedParseCommand(String args[]) {
+       if (args.length != EXPECTED_ARGUMENT_NUMBER) {
+           return false; 
+       }
+       int index = 0;
+       while (index < args.length) {
+           String arg = args[index];
+           if ("-d".equals(arg)) {
+               ++index; // Move to the next argument the value of device id
+               deviceId = args[index];
+           } else if ("-t".equals(arg)) {
+               ++index; // Move to the next argument the value of device token
+               deviceToken = args[index];
+           }
+           ++index;
+       }
+       if (deviceToken == null || deviceId == null ) {
+           return false;
+       }
+       return true;
+   }
+   
+   private static void printUsage() {
+       System.out.println("Usage: smartlight-mqtt-subpub" + " -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN");
+       System.out.println("       You must use ID and token of a device of 'Example Simple Smart Light' type (unique name cloud.artik.example.simple_smartlight)");
+   }
+
 }
