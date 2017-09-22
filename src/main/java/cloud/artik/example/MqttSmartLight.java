@@ -107,7 +107,6 @@ public class MqttSmartLight
     
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
-                System.out.println("Complete message delivery.");
             }
         };
     
