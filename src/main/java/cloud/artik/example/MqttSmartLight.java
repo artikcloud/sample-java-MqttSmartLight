@@ -37,10 +37,10 @@ public class MqttSmartLight
     static private final int EXPECTED_ARGUMENT_NUMBER = 4;
 
     public static void main( String[] args ) {
-    	if (!succeedParseCommand(args)) {
-    		printUsage();
-     		return;
-    	}
+        if (!succeedParseCommand(args)) {
+            printUsage();
+             return;
+        }
         MqttSmartLight mqtt = new MqttSmartLight();
         mqtt.startSession();
     }
@@ -58,7 +58,7 @@ public class MqttSmartLight
                 System.out.println("Failed " + opMode + "; reason: " + throwable.toString());
                 switch (opMode) {
                 case CONNECT:
-                	System.exit(0);
+                    System.exit(0);
                 default:
                     break;
                 }
@@ -123,15 +123,15 @@ public class MqttSmartLight
             
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
-            	if (mqttSession == null || !mqttSession.isConnected()) {
-            		System.out.println("\nExit.");
-            		return;
-            	}
+                if (mqttSession == null || !mqttSession.isConnected()) {
+                    System.out.println("\nExit.");
+                    return;
+                }
                 try {
                     System.out.println("\nPrepare shutting down. Disconnecting... Please wait...");
                     mqttSession.disconnect();
                     Thread.sleep(2000); //wait for disconnection to finish
-                	
+                    
                 } catch (ArtikCloudMqttException|InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -196,13 +196,16 @@ public class MqttSmartLight
     }
     
     ////////////////////////////////////////////
-   // Helper functions
-   //
-   // java -jar target/smartlight-mqtt-subpub.jar -d DEVICE_ID -t DEVICE_TOKEN
-   //
-   //       Must use ID and token of a device of 'Example Simple Smart Light' type (unique name cloud.artik.example.simple_smartlight)");
+    // Helper functions
+    //
+    // java -jar target/smartlight-mqtt-subpub.jar -h
+    //     PRINT usage
+    //
+    // java -jar target/smartlight-mqtt-subpub.jar -d DEVICE_ID -t DEVICE_TOKEN
+    //
+    //       Must use ID and token of a device of 'Example Simple Smart Light' type (unique name cloud.artik.example.simple_smartlight)");
    private static boolean succeedParseCommand(String args[]) {
-       if (args.length != EXPECTED_ARGUMENT_NUMBER) {
+       if ("-h".equals(args[0]) ||args.length != EXPECTED_ARGUMENT_NUMBER) {
            return false; 
        }
        int index = 0;
