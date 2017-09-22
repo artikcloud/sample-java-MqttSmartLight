@@ -198,14 +198,12 @@ public class MqttSmartLight
     ////////////////////////////////////////////
     // Helper functions
     //
-    // java -jar target/smartlight-mqtt-subpub.jar -h
-    //     PRINT usage
     //
     // java -jar target/smartlight-mqtt-subpub.jar -d DEVICE_ID -t DEVICE_TOKEN
     //
     //       Must use ID and token of a device of 'Example Simple Smart Light' type (unique name cloud.artik.example.simple_smartlight)");
    private static boolean succeedParseCommand(String args[]) {
-       if ("-h".equals(args[0]) ||args.length != EXPECTED_ARGUMENT_NUMBER) {
+       if (args.length != EXPECTED_ARGUMENT_NUMBER) {
            return false; 
        }
        int index = 0;
