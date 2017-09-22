@@ -44,7 +44,33 @@ Remember that you got the device ID and token of your smart light in the ARTIK C
 
 Then send Actions to the emulator using the [web tool](https://developer.artik.cloud/documentation/tutorials/an-iot-remote-control.html#test-the-light) at My ARTIK Cloud.
 
-From the emulator terminal, you should see that Actions are received and updated states (on or off) are published back to ARTIK Cloud.
+From the emulator terminal, you should see that Actions are received and updated states (on or off) are published back to ARTIK Cloud. The following is the example
+~~~shell
+  Start mqtt session....
+  Connecting to broker: ssl://api.artik.cloud:8883......
+  Succeeded: CONNECT
+
+  Subscribing to topic: /v1.1/actions/7d469......
+  Succeeded: SUBSCRIB
+  Subscribed to topic: /v1.1/actions/7d469
+
+  Received message. Payload: {"actions":[{"name":"setOn"}]}; Topic:/v1.1/actions/7d469; Qos:0
+  Handle Action: setOn
+  Set State to true
+  Publishing to topic: /v1.1/messages/7d469; message payload: {"state":true}; QoS:2.....
+  Complete message delivery.
+  Succeeded: PUBLISH
+  Published to topic: /v1.1/messages/7d469
+
+  Received message. Payload: {"actions":[{"name":"setOff"}]}; Topic:/v1.1/actions/7d469; Qos:0
+  Handle Action: setOff
+  Set State to false
+  Publishing to topic: /v1.1/messages/7d469; message payload: {"state":false}; QoS:2.....
+  Succeeded: PUBLISH
+  Published to topic: /v1.1/messages/7d469
+~~~
+
+Enter Ctrl+c to terminate the emulator.
 
 ## More about ARTIK Cloud
 
