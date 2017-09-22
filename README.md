@@ -58,7 +58,6 @@ From the emulator terminal, you should see that Actions are received and updated
   Handle Action: setOn
   Set State to true
   Publishing to topic: /v1.1/messages/7d469; message payload: {"state":true}; QoS:2.....
-  Complete message delivery.
   Succeeded: PUBLISH
   Published to topic: /v1.1/messages/7d469
 
