@@ -20,7 +20,7 @@ After completing this sample, you will learn:
  1. At My ARTIK Cloud, [connect a device](https://my.artik.cloud/new_device/cloud.artik.example.simple_smartlight) of the type "Example Simple Smart Light" (unique type name `cloud.artik.example.simple_smartlight`). You can use the one that you already own.
  2. Get the [device ID, device token](https://developer.artik.cloud/documentation/tools/web-tools.html#managing-a-device-token). You will need them when running the console app (smart light emulator). 
  
-### Setup two Java projects
+### Setup Java project
 
  1. Clone this repository if you haven't already done so.
  2. At the root directory and run the command:
