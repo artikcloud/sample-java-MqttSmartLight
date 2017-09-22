@@ -1,6 +1,6 @@
 # An MQTT sample app subscribes and publishes to ARTIK Cloud
 
-Let's build a Java console application that communicates to ARTIK Cloud [MQTT endpoint](https://developer.artik.cloud/documentation/data-management/mqtt.html) using ARTIK Cloud's [Java/Android SDK](https://github.com/artikcloud/artikcloud-java). This console app emulates a smart light, which turns on or off based on received Actions from ARTIK Cloud and sends the latest state (on or off) back to ARTIK Cloud.
+Let's build a Java console application that communicates to ARTIK Cloud [MQTT endpoint](https://developer.artik.cloud/documentation/data-management/mqtt.html) using ARTIK Cloud's [Java/Android SDK](https://github.com/artikcloud/artikcloud-java). This console app emulates a smart light, which turns on or off based on Actions from ARTIK Cloud and sends the latest state (on or off) back to ARTIK Cloud.
 
 After completing this sample, you will learn:
 
@@ -17,7 +17,7 @@ After completing this sample, you will learn:
 ### Setup at ARTIK Cloud
 
  1. At My ARTIK Cloud, [connect a device](https://my.artik.cloud/new_device/cloud.artik.example.simple_smartlight) of the type "Example Simple Smart Light" (unique type name `cloud.artik.example.simple_smartlight`). You can use the one that you already own.
- 2. Get the [device ID, device token](https://developer.artik.cloud/documentation/tools/web-tools.html#managing-a-device-token). You will need them when running the console app (smart light emulator). 
+ 2. Get the [device ID and token](https://developer.artik.cloud/documentation/tools/web-tools.html#managing-a-device-token). You will need them when running the console app (smart light emulator). 
  
 ### Setup Java project
 
@@ -29,14 +29,14 @@ After completing this sample, you will learn:
   ~~~
   The executable `mqtt-smartlight-x.x.jar` is generated under the target directory. 
 
- 3. Run the following command at target directory to learn the usage:
+ 3. Run the command at the target directory to learn the usage:
   ~~~shell
   java -jar mqtt-smartlight-x.x.jar
   ~~~
 
 ## Demo
 
- 1. Run the command at the target directory to start smart light emulator: 
+ 1. Start the smart light emulator. Run the command at the target directory: 
   ~~~shell
   java -jar mqtt-smartlight-x.x.jar -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN
   ~~~
@@ -45,7 +45,7 @@ After completing this sample, you will learn:
 
  2. send Actions to the emulator using the [web tool](https://developer.artik.cloud/documentation/tutorials/an-iot-remote-control.html#test-the-light) at My ARTIK Cloud.
 
- 3. From the emulator terminal, you should see that Actions are received and updated states (on or off) are published back to ARTIK Cloud. The following is the example
+ 3. The emulator terminal should show that Actions are received from the subscribed topic and updated states (on or off) are published back to ARTIK Cloud. The following is the example:
     ~~~shell
       Start mqtt session....
       Connecting to broker: ssl://api.artik.cloud:8883......
