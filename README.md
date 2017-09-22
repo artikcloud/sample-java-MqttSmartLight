@@ -1,6 +1,6 @@
 # An MQTT sample application subscribes and publishes to ARTIK Cloud
 
-Let's build a Java console application that communicates to [ARTIK Cloud MQTT endpoint](https://developer.artik.cloud/documentation/data-management/mqtt.html) using ARTIK Cloud's [Java/Android SDK](https://github.com/artikcloud/artikcloud-java). This console app emulates a smart light.
+Let's build a Java console application that communicates to ARTIK Cloud [MQTT endpoint](https://developer.artik.cloud/documentation/data-management/mqtt.html) using ARTIK Cloud's [Java/Android SDK](https://github.com/artikcloud/artikcloud-java). This console app emulates a smart light.
 
 After completing this sample, you will learn:
 
