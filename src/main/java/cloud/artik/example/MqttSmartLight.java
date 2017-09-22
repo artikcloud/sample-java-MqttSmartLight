@@ -28,7 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 import cloud.artik.mqtt.*;
 
-public class SmartLightMqttSubPub 
+public class MqttSmartLight 
 {
     // Device of "Example Simple Smart Light" (unique name cloud.artik.example.simple_smartlight)
     static private String deviceId     = null;
@@ -41,7 +41,7 @@ public class SmartLightMqttSubPub
     		printUsage();
      		return;
     	}
-        SmartLightMqttSubPub mqtt = new SmartLightMqttSubPub();
+        MqttSmartLight mqtt = new MqttSmartLight();
         mqtt.startSession();
     }
     
@@ -224,7 +224,7 @@ public class SmartLightMqttSubPub
    }
    
    private static void printUsage() {
-       System.out.println("Usage: smartlight-mqtt-subpub" + " -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN");
+       System.out.println("Usage: mqtt-smartlight" + " -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN");
        System.out.println("       You must use ID and token of a device of 'Example Simple Smart Light' type (unique name cloud.artik.example.simple_smartlight)");
    }
 

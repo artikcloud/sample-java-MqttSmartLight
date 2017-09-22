@@ -2,16 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cloud.artik.example</groupId>
-  <artifactId>smartlight-mqtt-subpub</artifactId>
+  <artifactId>mqtt-smartlight</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
-  <name>smartlight-mqtt-subpub</name>
+  <name>mqtt-smartlight</name>
   <url>http://maven.apache.org</url>
 
   <properties>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
      <project.build.javaVersion>1.8</project.build.javaVersion>
-     <assembly.mainClass>cloud.artik.example.SmartLightMqttSubPub</assembly.mainClass>
+     <assembly.mainClass>cloud.artik.example.MqttSmartLight</assembly.mainClass>
      <maven.version>3.3</maven.version>
   </properties>
   
