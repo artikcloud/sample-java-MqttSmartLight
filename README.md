@@ -1,6 +1,6 @@
 # An MQTT sample app subscribes and publishes to ARTIK Cloud
 
-Let's build a Java console application that communicates to ARTIK Cloud [MQTT endpoint](https://developer.artik.cloud/documentation/data-management/mqtt.html) using ARTIK Cloud's [Java/Android SDK](https://github.com/artikcloud/artikcloud-java). This console app emulates a smart light, which turns on or off based on Actions from ARTIK Cloud and sends the latest state (on or off) back to ARTIK Cloud.
+Let's build a Java console application that communicates to ARTIK Cloud [MQTT endpoint](https://developer.artik.cloud/documentation/data-management/mqtt.html) using ARTIK Cloud's [Java/Android SDK](https://github.com/artikcloud/artikcloud-java). This app emulates a smart light, which turns on or off based on Actions from ARTIK Cloud and sends the latest state (on or off) back to ARTIK Cloud.
 
 After completing this sample, you will learn:
 
@@ -43,7 +43,7 @@ After completing this sample, you will learn:
 
   Remember that you got the device ID and token of your smart light in the ARTIK Cloud setup phase.
 
- 2. send Actions to the emulator using the [web tool](https://developer.artik.cloud/documentation/tutorials/an-iot-remote-control.html#test-the-light) at My ARTIK Cloud.
+ 2. Send Actions to the emulator using the [web tool](https://developer.artik.cloud/documentation/tutorials/an-iot-remote-control.html#test-the-light) at My ARTIK Cloud.
 
  3. The emulator terminal should show that Actions are received from the subscribed topic and updated states (on or off) are published back to ARTIK Cloud. The following is the example:
     ~~~shell
