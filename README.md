@@ -37,9 +37,9 @@ After completing this sample, you will learn:
 ## Demo
 
  1. Start the smart light emulator. Run the command at the target directory: 
-  ~~~shell
-  java -jar mqtt-smartlight-x.x.jar -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN
-  ~~~
+    ~~~shell
+      java -jar mqtt-smartlight-x.x.jar -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN
+    ~~~
 
   Remember that you got the device ID and token of your smart light in the ARTIK Cloud setup phase.
 
@@ -71,11 +71,11 @@ After completing this sample, you will learn:
     ~~~
 
  4. Enter Ctrl+C to terminate the console application as following:
-  ~~~
-  ^C
-  Prepare shutting down. Disconnecting... Please wait...
-  Succeeded: DISCONNECT
-  ~~~
+    ~~~
+    ^C
+    Prepare shutting down. Disconnecting... Please wait...
+    Succeeded: DISCONNECT
+    ~~~
 
 ## More about ARTIK Cloud
 
