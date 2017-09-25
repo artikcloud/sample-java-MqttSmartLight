@@ -24,50 +24,49 @@ After completing this sample, you will learn:
  1. Clone this repository if you haven't already done so.
 
  2. At the root directory and run the command:
-  ~~~shell
-  mvn clean package
-  ~~~
-  The executable `mqtt-smartlight-x.x.jar` is generated under the target directory. 
+    ~~~shell
+    mvn clean package
+    ~~~
+    The executable `mqtt-smartlight-x.x.jar` is generated under the target directory. 
 
  3. Run the command at the target directory to learn the usage:
-  ~~~shell
-  java -jar mqtt-smartlight-x.x.jar
-  ~~~
+    ~~~shell
+    java -jar mqtt-smartlight-x.x.jar
+    ~~~
 
 ## Demo
 
  1. Start the smart light emulator. Run the command at the target directory: 
     ~~~shell
-      java -jar mqtt-smartlight-x.x.jar -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN
+    java -jar mqtt-smartlight-x.x.jar -d YOUR_DEVICE_ID -t YOUR_DEVICE_TOKEN
     ~~~
-
-  Remember that you got the device ID and token of your smart light in the ARTIK Cloud setup phase.
+   Remember that you got the device ID and token of your smart light in the ARTIK Cloud setup phase.
 
  2. Send Actions to the emulator using the [web tool](https://developer.artik.cloud/documentation/tutorials/an-iot-remote-control.html#test-the-light) at My ARTIK Cloud.
 
  3. The emulator terminal should show that Actions are received from the subscribed topic and updated states (on or off) are published back to ARTIK Cloud. The following is the example:
     ~~~shell
-      Start mqtt session....
-      Connecting to broker: ssl://api.artik.cloud:8883......
-      Succeeded: CONNECT
+    Start mqtt session....
+    Connecting to broker: ssl://api.artik.cloud:8883......
+    Succeeded: CONNECT
 
-      Subscribing to topic: /v1.1/actions/7d469......
-      Succeeded: SUBSCRIB
-      Subscribed to topic: /v1.1/actions/7d469
+    Subscribing to topic: /v1.1/actions/7d469......
+    Succeeded: SUBSCRIB
+    Subscribed to topic: /v1.1/actions/7d469
 
-      Received message. Payload: {"actions":[{"name":"setOn"}]}; Topic:/v1.1/actions/7d469; Qos:0
-      Handle Action: setOn
-      Set State to true
-      Publishing to topic: /v1.1/messages/7d469; message payload: {"state":true}; QoS:2.....
-      Succeeded: PUBLISH
-      Published to topic: /v1.1/messages/7d469
+    Received message. Payload: {"actions":[{"name":"setOn"}]}; Topic:/v1.1/actions/7d469; Qos:0
+    Handle Action: setOn
+    Set State to true
+    Publishing to topic: /v1.1/messages/7d469; message payload: {"state":true}; QoS:2.....
+    Succeeded: PUBLISH
+    Published to topic: /v1.1/messages/7d469
 
-      Received message. Payload: {"actions":[{"name":"setOff"}]}; Topic:/v1.1/actions/7d469; Qos:0
-      Handle Action: setOff
-      Set State to false
-      Publishing to topic: /v1.1/messages/7d469; message payload: {"state":false}; QoS:2.....
-      Succeeded: PUBLISH
-      Published to topic: /v1.1/messages/7d469
+    Received message. Payload: {"actions":[{"name":"setOff"}]}; Topic:/v1.1/actions/7d469; Qos:0
+    Handle Action: setOff
+    Set State to false
+    Publishing to topic: /v1.1/messages/7d469; message payload: {"state":false}; QoS:2.....
+    Succeeded: PUBLISH
+    Published to topic: /v1.1/messages/7d469
     ~~~
 
  4. Enter Ctrl+C to terminate the console application as following:
