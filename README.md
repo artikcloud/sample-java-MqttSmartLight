@@ -70,7 +70,12 @@ After completing this sample, you will learn:
       Published to topic: /v1.1/messages/7d469
     ~~~
 
- 4. Enter Ctrl+C to terminate the console application.
+ 4. Enter Ctrl+C to terminate the console application as following:
+  ~~~
+  ^C
+  Prepare shutting down. Disconnecting... Please wait...
+  Succeeded: DISCONNECT
+  ~~~
 
 ## More about ARTIK Cloud
 
