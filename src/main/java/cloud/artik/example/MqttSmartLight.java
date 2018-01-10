@@ -35,6 +35,8 @@ public class MqttSmartLight
     static private String deviceToken  = null;
    
     static private final int EXPECTED_ARGUMENT_NUMBER = 4;
+    static private final String ERROR_TYPE_RECEIVED = "error";
+    static private final String ACTION_TYPE_RECEIVED = "actions";
 
     public static void main( String[] args ) {
         if (!succeedParseCommand(args)) {
@@ -70,9 +72,12 @@ public class MqttSmartLight
                 System.out.println("Succeeded: " + opMode);        
                 switch (opMode) {
                 case CONNECT:
-                    System.out.println("\nSubscribing to topic: " + mqttSession.getSubscribeTopic() + "......" );
                     try {
-                         mqttSession.subscribe();
+                    	//subscribe to receive publish errors associated with MQTT message publishing. 
+                    	mqttSession.subscribe(Topics.SUBSCRIBE_TOPIC_ERRORS);
+
+                        //subscribe to receive Actions 
+                        mqttSession.subscribe(Topics.SUBSCRIBE_TOPIC_ACTIONS);
                     } catch (ArtikCloudMqttException e) {
                         e.printStackTrace();
                     } 
@@ -83,8 +88,9 @@ public class MqttSmartLight
                 case PUBLISH:
                     System.out.println("Published to topic: " + mqttToken.getTopics()[0]);
                     break;
-                case SUBSCRIB: 
-                    System.out.println("Subscribed to topic: " + mqttToken.getTopics()[0]);
+                case SUBSCRIBE_ACTIONS:
+                case SUBSCRIBE_ERRORS:
+//                    System.out.println("Subscribed to topic: " + mqttToken.getTopics()[0]);
                     break;
                     
                 default:
@@ -101,8 +107,9 @@ public class MqttSmartLight
     
             @Override
             public void messageArrived(String topic, MqttMessage message) {
+            	// Actions and publish error messages should all come here ......
                 System.out.println("\nReceived message. Payload: " + new String(message.getPayload()) + "; Topic:" + topic + "; Qos:" + message.getQos());
-                handleAction(new String(message.getPayload()));
+                handleReceived(new String(message.getPayload()));
             }
     
             @Override
@@ -143,21 +150,34 @@ public class MqttSmartLight
 
      }
 
+    private void handleReceived(String received) {
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jo = (JsonObject)jsonParser.parse(received);
+        JsonElement elem = jo.get(ACTION_TYPE_RECEIVED);
+        if (elem != null) {
+        	handleAction((JsonArray)elem);
+        } else {
+        	elem = jo.get(ERROR_TYPE_RECEIVED);
+        	if (elem != null) {
+        		handleMessageFromErrorTopic(elem);
+        	} else {
+        		System.out.println("From subscribed topics, received unexpected message -- " + received);
+        	}
+        }
+    	
+    }
+    
+
     /* Examples of received actions:
      * 
      * {"actions":[{"name":"setOn"}]}
      * 
      * {"actions":[{"name":"setOff"}]}
      */
-    private void handleAction(String receivedActions) {
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jo = (JsonObject)jsonParser.parse(receivedActions);
-
-        JsonArray jsonArr = jo.getAsJsonArray("actions");
-
+    private void handleAction(JsonArray actions) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<SimpleAction>>() {}.getType();
-        List<SimpleAction> actionList = gson.fromJson(jsonArr, listType);
+        List<SimpleAction> actionList = gson.fromJson(actions, listType);
         
         if (actionList.size() > 0) {
             SimpleAction action = actionList.get(0);
@@ -177,10 +197,27 @@ public class MqttSmartLight
         }
     }
     
+    /* Example of received error
+     *         	{
+        		  "error":{
+        		    "code":429,
+        		    "message":"DEVICE MINUTE rate limit exceeded",
+        		    "X-Rate-Limit-Limit":"1/50000",
+        		    "X-Rate-Limit-Remaining":"0/49995",
+        		    "X-Rate-Limit-Reset":"1458072876/1458086400",
+        		    "id":"04642e813c9e416b96e3f05d131a84df"
+        		  }
+        		}
+     *		
+     */
+    private void handleMessageFromErrorTopic(JsonElement error) {
+    	System.out.println("Handle Error: " + error.getAsString());
+     }
+
     void updateState(boolean state) {
         String payload    =  "{\"state\":" + state +"}";
         System.out.println("Set State to " + state);
-        System.out.println("Publishing to topic: " + mqttSession.getPublishTopic() + "; message payload: " + payload + "; QoS:" + PUBLISH_QOS + ".....");
+        System.out.println("Publishing to topic: " + mqttSession.getPublishTopicPath() + "; message payload: " + payload + "; QoS:" + PUBLISH_QOS + ".....");
         try {
             mqttSession.publish(PUBLISH_QOS, payload);
         } catch (ArtikCloudMqttException e) {

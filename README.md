@@ -50,10 +50,11 @@ After completing this sample, you will learn:
     Connecting to broker: ssl://api.artik.cloud:8883......
     Succeeded: CONNECT
 
-    Subscribing to topic: /v1.1/actions/7d469......
-    Succeeded: SUBSCRIB
-    Subscribed to topic: /v1.1/actions/7d469
-
+    subscribe to: /v1.1/errors/7d469
+    subscribe to: /v1.1/actions/7d469
+    Succeeded: SUBSCRIBE_ERRORS
+    Succeeded: SUBSCRIBE_ACTIONS
+   
     Received message. Payload: {"actions":[{"name":"setOn"}]}; Topic:/v1.1/actions/7d469; Qos:0
     Handle Action: setOn
     Set State to true
